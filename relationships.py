@@ -27,6 +27,7 @@ class Catagory():
             # print selected
             pass
 
+
     def add_parent(self):
         pass
 
@@ -123,12 +124,7 @@ class System():
         print("get catagories list      : catagories")
         print("get current properties   : current")
         print("change selected Catagory : modify <catagory>")
-        print("add parent relationship  : add parent")
-        print("remove parent            : remove parent")
-        print("add pairing relationship : add pairing")
-        print("remove pairing           : remove pairing")
-        print("add child relationship   : add child")
-        print("remove child             : remove child")
+        print("add or remove properties : change properties")
         print("add Catagory             : add catagory <name>")
         print("remove Catagory          : remove catagory <name>")
         print("finish relationships     : done")
@@ -150,12 +146,9 @@ class System():
                 print("get catagories list      : catagories")
                 print("get current properties   : current")
                 print("change selected Catagory : modify <catagory>")
-                print("add parent relationship  : parent")
-                print("remove parent            : remove parent")
-                print("add pairing relationship : pairing")
-                print("remove pairing           : remove pairing")
-                print("add child relationship   : child")
-                print("remove parent            : remove parent")
+                print("add or remove properties : change properties")
+                print("add Catagory             : add catagory <name>")
+                print("remove Catagory          : remove catagory <name>")
                 print("finish relationships     : done")
                 print("-------\n")
             elif user_input == "catagories":
@@ -169,35 +162,22 @@ class System():
                 print("Modifying Catagory: {}".format(selected_catagory))
                 self.catagories[selected_catagory][0].print_relationships()
                 print("-------\n")
+            elif user_input == "change properties":
+                self.modify_properties(selected_catagory)
             elif len(user_input) > 3:
                 info = user_input.split(" ")
                 if info[0] == "add":
-                    if len(info) == 2:
-                        if info[1] == "parent":
-                            self.catagories[selected_catagory][0].add_parent()
-                        elif info[1] == "pairing":
-                            self.catagories[selected_catagory][0].add_pairing()
-                        elif info[1] == "child":
-                            self.catagories[selected_catagory][0].add_child()
-                    elif len(info) > 2:
+                    if len(info) > 2:
                         if info[1] == "catagory":
                             self.add_catagory(info[12].strip())
                 elif info[0] == "remove":
-                    if len(info) == 2:
-                        if info[1] == "parent":
-                            self.catagories[selected_catagory][0].remove_parent()
-                        elif info[1] == "pairing":
-                            self.catagories[selected_catagory][0].remove_pairing()
-                        elif info[1] == "child":
-                            self.catagories[selected_catagory][0].remove_child()
-                    elif len(info) > 2:
+                    if len(info) > 2:
                         if info[1] == "catagory":
                             self.remove_catagory(info[15].strip())
                 elif info[0] == "modify":
                     if len(info) == 2:
                         name = user_input[6].strip()
                         new_selection = self.catagories.get(name, False)
-
                         if new_selection:
                             print("Now Modifying Catagory: {}".format(selected_catagory))
                             selected_catagory = new_selection
@@ -240,8 +220,14 @@ class System():
                 # Catagory
                 pass
 
+    def modify_properties(self, selected_catagory):
+        catagory_class = self.catagories[selected_catagory][0]
+        catagories = self.catagories.keys()
+        
+        
 
 
 
-
+        
+        self.catagories[selected_catagory][0] = catagory_class
 
